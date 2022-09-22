@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %} <!-- hereda los atributos de la clase base -->
+{% load static %} <!-- Carga la carpeta static -->
+
+<!--=================================-->
+{% block title %}{% endblock %}
+<!-- ================================-->
+
+<!--=================================-->
+{% block extend_header %}{% endblock %} <!--Herda el header-->
+<!--=================================-->
+
+<!--=================================-->
+{% block extend_footer %}{% endblock %} <!--Hereda el footer -->
+<!--=================================-->
+{% block content %} <!-- Contenido de la reseña -->
+<!DOCTYPE html>
+<html lang="en">
+<!-- Page Header-->
+<header class="masthead" style="background-image: url('{{object.image.url}}')"> <!--Imagen del background del header-->
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-xl7">
+                <div class="page-heading">
+                    <h1>{{object.name}}</h1> <!-- Muestra el nombre de la reseña -->
+                    <span class="subheading">{{object.description}}</span> <!-- Muestra la descripción de la reseña -->
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<body>
+
+    <section>
+        <div class="sectionSpaceSm">
+            <div class="container">
+                {{object.body|safe}} <!--Muestra el contneido de la reseña -->
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'main/base.html' %} <!-- Hereda los atributos del archivo base -->
+{% load static %} <!-- Carga la carpeta static -->
+
+<!--=================================-->
+{% block title %}{% endblock %}
+<!-- ================================-->
+
+<!--=================================-->
+{% block extend_header %}{% endblock %} <!-- Hereda el header -->
+<!--=================================-->
+
+<!--=================================-->
+{% block extend_footer %}{% endblock %} <!-- Hereda el footer -->
+<!--=================================-->
+{% block content %} <!-- Mostrar bloque de contenido -->
+<!DOCTYPE html>
+<html lang="en">
+<!-- Header de la página -->
+<header class="masthead" style="background-image: url('/static/assets/img/a4206232b5b23615f764916e83efdbea.gif')"> <!-- Imagen del header -->
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-xl7">
+        <div class="page-heading">
+          <h1>Categoría: Reseñas</h1> <!-- Título agregado en el header -->
+          <span class="subheading">Shueisha</span></br></br>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!--CUERPO DE LA SECCIÓN DE RESEÑAS-->
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h3 class="animate-charcter"> Reseñas </h3>
+      </div>
+    </div>
+  </div>
+  <div id="proof2">
+    <div class="container-fluid p-0">
+        <div class="row g-0">
+            {% for p in object_list %} <!-- Ciclo for para mostrar solo tres posiciones -->
+            {% if p.is_active %} <!-- Ciclo if para mostrar solo las reseñas que se encuentren activas -->
+            <div class="col-lg-4 col-sm-6">
+                <a class="proof-box" href="{% url 'andromeda:review' slug=p.slug %}"> <!--agregamos referencia para ir a la reseña cuando se haga clic sobre la imagen-->
+                    <img class="img-fluid" src="{{p.image.url}}" width="650" heigh="350" alt="..." /> <!--Muestra imagen correspondiente a la reseña -->
+                    <div class="proof-box-caption">
+                      <div class="project-name text-white-100"
+                            href="{% url 'andromeda:review' slug=p.slug %}">{{p.name}}</div> <!-- Muestra el nombre de la reseña -->
+                    </div>
+                </a>
+            </div>
+            {% endif %} <!-- Cerramos ciclo if -->
+            {% endfor %} <!-- Cerramos ciclo for -->
+        </div>
+
+</section>
+</html>
+{% endblock %}

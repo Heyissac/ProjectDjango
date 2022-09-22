@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %} <!-- Extiende del índice -->
+{% load static %} <!-- Cargamos carpeta static -->
+
+<!--=================================-->
+{% block title %}{% endblock %}
+<!-- ================================-->
+
+<!--=================================-->
+{% block extend_header %}{% endblock %} <!--Hereda los atributos del header-->
+<!--=================================-->
+
+<!--=================================-->
+{% block extend_footer %}{% endblock %} <!--Hereda los atributos del footer-->
+<!--=================================-->
+================================= -->
+{% block content %}
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <div class="login">
+                                <div class="form">
+                                  <h2>Bienvenido</h2>
+                                  <input type="text" name="username" placeholder="Username">
+                                  <input type="password" name="password" placeholder="Password">
+                                  <input type="submit" value="Sign In" class="submit">
+                                </div>
+                                <div>
+                                    <p class="mb-0">¿No tienes una cuenta? <a href="{% url 'andromeda:register' %}" class="text-white-50 fw-bold">Regístrate</a></br>
+                                    </p>
+                                  </div>
+                              </div>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+</section>
+{% endblock %}
+<!-- ================================
+End Content
+================================= -->

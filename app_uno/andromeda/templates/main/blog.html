@@ -1,0 +1,76 @@
+{% extends 'main/base.html' %} <!-- Hereda los atributos de la clase base-->
+{% load static %} <!-- Carga la carpeta static -->
+
+<!--=================================-->
+{% block title %}{% endblock %}
+<!-- ================================-->
+
+<!--=================================-->
+{% block extend_header %}{% endblock %}
+<!--=================================-->
+
+<!--=================================-->
+{% block extend_footer %}{% endblock %}
+<!--=================================-->
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- Header de la página -->
+<header class="masthead" style="background-image: url('/static/assets/img/ccc839332d89d6150db61b7e47da89f1.gif')"> <!-- referencia de imagen del header -->
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-x17">
+        <div class="page-heading">
+          <h1>Categoría: Blog</h1></br></br></br><!--Subtítulo del header -->
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- Contenido principal de blog.html -->
+<section>
+  <div class="innerPageBannerCol">
+    <div class="container">
+      <div class="row g-4 g-md-3  align-items-center">
+        <div class="col">
+          <div class="bannerContent">
+            <h1 class="xlTitle pb-md-3">Mira nuestros animés y mangas favoritos, entre otras opiniones</h1> <!--Pequeña descripción de la función de este apartado-->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <section class="page-section bg-light" id="portfolio2">
+    <div class="container">
+      <div class="row">
+        {% for b in object_list %} <!--Ciclo for para buscar dentro de la bd -->
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <!-- Aquí está el código para mostrar los blogs creados -->
+          <div class="portfolio2-item">
+            <a class="portfolio2-link" href="{% url 'andromeda:blog' slug=b.slug %}">
+              <div class="portfolio2-hover">
+                <!-- Clase para colocar la textura amarilla que aparece cuando se posiciona sobre un blog. -->
+                <div class="portfolio2-hover-content"><i class="fas fa-plus fa-spin fa-3x"></i></div>
+              </div>
+              <img class="img-fluid2" src="{{b.image.url}}" alt="..." /> <!-- Muestra la imagen del blog -->
+            </a>
+            <div class="portfolio2-caption">
+              <h4 class="portfolio2-caption-heading"><a href="{% url 'andromeda:blog' slug=b.slug %}">{{b.name}}</a> <!-- Título del blog, si se da clic permite ir al blog -->
+              </h4>
+              <div class="portfolio2-caption-subheading text-muted fst-italic">{{b.author}},
+                {{b.timestamp.date}}</div> <!-- Nombre del autor y fecha de creación S-->
+              <p>
+                <a href="{% url 'andromeda:blog' slug=b.slug %}"></a> <!--Permite ir al blog -->
+              </p>
+            </div>
+          </div>
+        </div>
+        {% endfor %} <!--Termina ciclo for -->
+      </div>
+  </section>
+
+</html>
+{%endblock%}

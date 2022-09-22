@@ -1,0 +1,113 @@
+{% extends 'main/base.html' %} <!-- Extiende del índice -->
+{% load static %} <!-- Cargamos carpeta static -->
+
+<!--=================================-->
+{% block title %}{% endblock %}
+<!-- ================================-->
+
+<!--=================================-->
+{% block extend_header %}{% endblock %} <!--Hereda los atributos del header-->
+<!--=================================-->
+
+<!--=================================-->
+{% block extend_footer %}{% endblock %} <!--Hereda los atributos del footer-->
+<!--=================================-->
+
+<!--=================================== BODY ===================================-->
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <!-- Header de la sección de índice -->
+    <header class="masthead" style="background-image: url('static/assets/img/23-gif-ideas-in-2022-anime-wallpaper-live-kawaii-anime-anime-wallpaper.gif')"> <!-- En el header agregamos un gif -->
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>Shueisha</h1> <!-- Título de la página en el header -->
+                        <span class="subheading">Las mejores reseñas de los mejores mangas</span></br></br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Contenido principal-->
+    <!--Visualización de una sección de blogs en el índice-->
+    <section class="page-section bg-light" id="portfolio">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-heading text-uppercase"><a href="{% url 'andromeda:blogs' %}">Blogs</a></h2> <!--Título de la sección de blogs, con acción y link de referencia para dirigirse la sección de blogs.-->
+                <div class="post-preview">
+                    <span class="post-meta text-center"> <!--Agregamos un estilo de texto y una especie de subtítulo contenido en la etiqueta span-->
+                        ¿Te interesa? Sigue leyendo...
+                    </span>
+                </div>
+            </div>
+            <!-- Línea divisora de secciones -->
+            <hr class="my-4" />
+
+            <div class="row"> 
+                {% for b in blogs|slice:":6" %} <!--Ciclo for para que muestre solo 6 blogs en el índice-->
+                {% if b.is_active %}<!--Muestra solo los blogs que se encuentren activo en la sección de administración-->
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <!-- Aquí está el código para mostrar los blogs creados -->
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" href="{% url 'andromeda:blog' slug=b.slug %}"> <!-- Mostrar los datos contenido en la sección de blogs ajustándos a los parámetros establecidos-->
+                            <div class="portfolio-hover">
+                                <!-- Clase para colocar la textura amarilla que aparece cuando se posiciona sobre un blog. -->
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-spin fa-3x"></i></div>
+                            </div>
+                            <img class="img-fluid2" src="{{b.image.url}}" alt="..." /> <!--Etiqueta de imagen que permite ver la imagen correspondiente al blog-->
+                        </a>
+                        <div class="portfolio-caption">
+                            <h4 class="portfolio-caption-heading"><a
+                                    href="{% url 'andromeda:blog' slug=b.slug %}">{{b.name}}</a></h4> <!-- Agregamos el nombre del blog -->
+                            <div class="portfolio-caption-subheading text-muted fst-italic">{{b.author}},
+                                {{b.timestamp.date}}</div> <!-- Agregamos el autor y la fecha de creación del blog -->
+                            <p>
+                                <a href="{% url 'andromeda:blog' slug=b.slug %}"></a> <!-- Línea para redirigir a la sección de blogs -->
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %} <!--Se cierra ciclo if-->
+                {% endfor %} <!--Se cierra ciclo for-->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lúnea divisora -->
+    <hr class="my-4" />
+
+    <!-- Sección del índice para mostrar las reseñas -->
+    <section>
+        <div class="sectionSpace">
+            <div class="container">
+                <div class="col">
+                    <h4 class="smText regular">Reseñas recientes</h4>
+                </div>
+                <div id="proof">
+                    <div class="container-fluid p-0">
+                        <div class="row g-0">
+                            {% for p in review|slice:":3" %} <!-- Ciclo for para mostrar solo tres posiciones -->
+                            {% if p.is_active %} <!-- Ciclo if para mostrar solo las reseñas que se encuentren activas -->
+                            <div class="col-lg-4 col-sm-6">
+                                <a class="proof-box" href="{% url 'andromeda:review' slug=p.slug %}"> <!--agregamos referencia para ir a la reseña cuando se haga clic sobre la imagen-->
+                                    <img class="img-fluid" src="{{p.image.url}}" width="650" heigh="350" alt="..." /> <!--Muestra imagen correspondiente a la reseña -->
+                                    <div class="proof-box-caption">
+                                        <div class="project-category text-white-100">{{p.date}}, por: {{p.author}}</div> <!-- Muestra el autor y la fecha de creación de la reseña-->
+                                        <div class="project-name text-white-100"
+                                            href="{% url 'andromeda:review' slug=p.slug %}">{{p.name}}</div> <!-- Muestra el nombre de la reseña -->
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %} <!-- Cerramos ciclo if -->
+                            {% endfor %} <!-- Cerramos ciclo for -->
+                        </div>
+        </div>
+    </section>
+</body>
+
+</html>
+{% endblock %}

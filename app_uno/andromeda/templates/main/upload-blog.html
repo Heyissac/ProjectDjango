@@ -1,0 +1,85 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+<!--=================================-->
+{% block title %}{% endblock %}
+<!-- ================================-->
+
+<!--=================================-->
+{% block extend_header %}{% endblock %}
+<!--=================================-->
+
+<!--=================================-->
+{% block extend_footer %}{% endblock %}
+<!--=================================-->
+
+<!--=================================== BODY ===================================-->
+{% block content %}
+<!-- Page Header-->
+<header class="masthead"
+  style="background-image: url('/static/assets/img/6682744.webp')">
+  <div class="container position-relative px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-xl7">
+        <div class="page-heading">
+          <h1>Sube tu blog</h1>
+          <span class="subheading">Shueisha</span></br></br>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!--Inicio del código para subir un blog-->
+<section>
+  <div class="innerPageBannerCol">
+    <div class="container">
+      <div class="row g-4 g-md-3  align-items-center">
+        <div class="col-md-6">
+          <div class="bannerContent">
+            <h1 class="xlTitle pb-md-3">Envía un blog</h1> <!-- Subtítulo que aparece en la sección de blogs -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Subir un blog -->
+<main class="mb-4">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <p>Quieres que conozcamos sobre algún anime, no dudes en dejar un blog aquí. Puedes buscarlo en la sección de "BLOG"</p>
+        <div class="my-5">
+          <form id="UploadForm" method="POST" action="{% url 'andromeda:uploadblog' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-floating">
+              <input class="form-control" name="author" id="author" type="text" placeholder="Enter your name..." /> <!--Campo para colocar el nombre de quien escribe el blog-->
+              <label for="author">Autor</label>
+            </div>
+            <div class="form-floating">
+              <input class="form-control" name="name" id="name" type="text" placeholder="Enter your name..." /> <!--Campo para colocar el nombre del anime-->
+              <label for="name">Nombre del anime </label>
+            </div>
+            <div class="form-floating">
+              <input class="form-control" name="description" id="description" type="text" placeholder="Enter your name..." /> <!--Campo para colocar una descripción del anime-->
+              <label for="description">Descripción</label>
+            </div>
+            <div class="form-floating">
+              <textarea class="form-control" name="body" id="body" placeholder="Enter your message here..." style="height: 12rem"></textarea> <!--Campo para colocar el blog-->
+              <label for="body">Blog</label>
+            </div>
+
+            <label for="'image">Imagen: </label></br> <!--Campo para colocar la imagen representativa del anime-->
+            {{form.image}} <!--Tomamos el formato de la imagen, creado en el forms.py -->
+
+            <button class="btn btnPrimary" id="submitButton" type="submit" value="Submit">Send</button> <!--Botón para enviar la reseña-->
+            <br />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
